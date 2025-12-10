@@ -5,7 +5,7 @@ import com.github.eco_backend.dto.GenerationApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -13,7 +13,7 @@ public class ExternalApiService {
 
     private final GenerationDataClient generationDataClient;
 
-    public GenerationApiResponse fetchGenerationData(LocalDateTime from, LocalDateTime to) {
+    public GenerationApiResponse fetchGenerationData(Instant from, Instant to) {
 
         return generationDataClient.getGenerationMixData(from.toString(), to.toString());
     }

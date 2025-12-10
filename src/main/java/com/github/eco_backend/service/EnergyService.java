@@ -10,10 +10,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -35,9 +37,9 @@ public class EnergyService {
     public List<DailyMixResponse> getAverageEnergyMix() {
         LocalDate today = LocalDate.now(ZoneId.of("UTC"));
 
-        LocalDateTime start = today.atStartOfDay();
+        Instant start = today.atStartOfDay(ZoneId.of("UTC")).toInstant();
 
-        LocalDateTime end = start.plusDays(3);
+        Instant end = start.plus(3, ChronoUnit.DAYS);
 
         GenerationApiResponse generationApiResponse = externalApiService.fetchGenerationData(start, end);
 
@@ -59,10 +61,10 @@ public class EnergyService {
             throw new IllegalArgumentException("Duration must be between 1 and 6 hours");
         }
 
-        LocalDateTime start = LocalDateTime.now(ZoneId.of("UTC"));
+        ZonedDateTime nowUTC = LocalDateTime.now(ZoneId.of("UTC")).atZone(ZoneId.of("UTC"));
+        Instant start = nowUTC.toInstant();
 
-        LocalDateTime end = start.plusDays(2);
-
+        Instant end = start.plus(2, ChronoUnit.DAYS);
         log.info("Window start: {}, Window end: {}", start, end);
         GenerationApiResponse generationApiResponse = externalApiService.fetchGenerationData(start, end);
 

@@ -13,8 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
@@ -32,9 +32,6 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class EnergyServiceTest {
-
-    @Mock
-    private GenerationDataClient generationDataClient;
 
     @Mock
     private ExternalApiService externalApiService;
@@ -79,7 +76,7 @@ class EnergyServiceTest {
 
         GenerationApiResponse mockResponse = new GenerationApiResponse(mockData);
 
-        when(externalApiService.fetchGenerationData(any(LocalDateTime.class), any(LocalDateTime.class)))
+        when(externalApiService.fetchGenerationData(any(Instant.class), any(Instant.class)))
                 .thenReturn(mockResponse);
 
         List<DailyMixResponse> result = underTest.getAverageEnergyMix();
