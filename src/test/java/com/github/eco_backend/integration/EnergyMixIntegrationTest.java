@@ -33,7 +33,7 @@ class EnergyMixIntegrationTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("Should return 200 OK and a list of 3 daily energy mix forecasts")
     void getMixForecast_thenReturnBodyAndStatusOK() {
         RestAssured.given()
                 .when()
@@ -46,7 +46,7 @@ class EnergyMixIntegrationTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("Should return 200 OK and charge window details")
     void getChargeWindow_thenReturnBodyAndStatusOK() {
         RestAssured.given()
                 .param("duration", 3)
@@ -61,7 +61,7 @@ class EnergyMixIntegrationTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("Should return 400 BAD REQUEST when duration is invalid")
     void getChargeWindow_DurationInvalid_thenReturnBodyAndStatusBadReqeust() {
         RestAssured.given()
                 .param("duration", 35)

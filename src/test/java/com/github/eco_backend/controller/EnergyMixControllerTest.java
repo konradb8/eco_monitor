@@ -45,7 +45,7 @@ class EnergyMixControllerTest {
     ObjectMapper objectMapper;
 
     @Test
-    @DisplayName("")
+    @DisplayName("Should return 200 OK and average energy mix")
     void whenGetAverageEnergyMix_thenReturnOk() throws Exception {
 
         List<DailyMixResponse> response = List.of(
@@ -63,7 +63,7 @@ class EnergyMixControllerTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("Should return 200 OK and charge window details")
     void whenDurationIsValid_thenReturnOk() throws Exception {
 
         ChargeWindowResponse response = new ChargeWindowResponse(TEST_DATE_TIME, TEST_DATE_TIME2, 75.0);

@@ -5,6 +5,7 @@ import com.github.eco_backend.dto.DailyMixResponse;
 import com.github.eco_backend.dto.GenerationApiResponse;
 import com.github.eco_backend.dto.GenerationDataResponse;
 import com.github.eco_backend.dto.GenerationMixResponse;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -40,6 +41,7 @@ class EnergyServiceTest {
     private EnergyService underTest;
 
     @Test
+    @DisplayName("Should calculate average energy mix correctly for multiple days")
     void testGetAverageEnergyMix() {
 
         LocalDate today = LocalDate.now(ZoneId.of("UTC"));
@@ -112,6 +114,7 @@ class EnergyServiceTest {
     }
 
     @ParameterizedTest
+    @DisplayName("Should throw IllegalArgumentException when duration is invalid")
     @ValueSource(ints = {0, -1, 7, 10, 100})
     void testGetOptimalChargeWindow_windowLengthIncorrect(int duration) {
 
